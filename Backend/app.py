@@ -1,7 +1,11 @@
 from flask import Flask, json,render_template,redirect,request,url_for,session,jsonify
+from flask_cors.decorator import cross_origin
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
 
 app.secret_key = "hello"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
@@ -27,18 +31,28 @@ def index():
     return render_template("index.html")
 
 @app.route("/signup",methods=["POST",'GET'])
+@cross_origin(allow_headers=['Content-Type'])
 def signup():
     if request.method == "POST":
-        print(request.form)
-        name = request.form["name"]
-        email = request.form["email"]
-        username = request.form["username"]
-        password = request.form["password"]
+        requestJson = request.get_json(force=True)
+        requestJson = requestJson['formdata']
+        print("Hello")
+        # print(requestJson['formdata']['name'])
+        # print(request.form)
+        name = requestJson["name"]
+        email = requestJson["email"]
+        username = requestJson["username"]
+        password = requestJson["password"]
         print(name)
         newUser = users(name,email,username,password)
         db.session.add(newUser)
         db.session.commit()
-        return jsonify({'user':name,'email':email})
+        response = jsonify({'user':name,'email':email})
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        response.headers.add("content-type","application/json")
+        return response
     else:
         return jsonify({"hello":"world"})
 
