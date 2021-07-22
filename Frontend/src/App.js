@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './Form';
 import Login from './Login';
 import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
+import Landing from './Landing';
 
 
 function App() {
@@ -14,6 +15,9 @@ function App() {
                 </Route>
                 <Route path="/login">
             <Login/>
+            </Route>
+            <Route path="/landing">
+            <Landing/>
             </Route>
             </Switch>
         </div>
