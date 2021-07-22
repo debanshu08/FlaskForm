@@ -4,6 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import get_jwt_identity
 import datetime
 app = Flask(__name__)
 CORS(app)
@@ -72,21 +74,27 @@ def login():
         requestJson = request.get_json(force=True)
         requestJson = requestJson['formdata']
         user = requestJson["username"]
+        password = requestJson["password"]
         found_user = users.query.filter_by(username=user).first()
+        found_password = users.query.filter_by(password=password).first()
         print(found_user)
-        if found_user:
+        if found_user and found_user.password == password:
             # return {'Success':found_user._id},200
             expires = datetime.timedelta(days=7)
             access_token = create_access_token(identity=str(found_user._id), expires_delta=expires)
             return jsonify({'token': access_token}), 200
+        elif found_user and found_user.password !=password:
+            return jsonify({'passError':'Password Incorrect!'}),401
+        elif found_password and not found_user:
+            return jsonify({'userError': 'Username not found, Try again'}), 401
         else:
-            return {'error': 'Username not found'}, 401
+            return jsonify({'error':'Sign Up'}),401
 
-# @app.route("/landing")
-# def landing():
-#     if "user" not in session:
-#         return redirect(url_for("signup"))
-#     return render_template("landing.html")
+@app.route("/landing")
+@jwt_required()
+def landing():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
 
 
 if __name__ == "__main__":
