@@ -36,9 +36,9 @@ class users(db.Model):
         self.password = password
 
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+# @app.route("/")
+# def index():
+#     return render_template("index.html")
 
 
 @app.route("/signup", methods=["POST", 'GET'])
@@ -46,9 +46,10 @@ def index():
 def signup():
     if request.method == "POST":
         requestJson = request.get_json(force=True)
+        print(requestJson)
         requestJson = requestJson['formdata']
         print("Hello")
-        # print(requestJson['formdata']['name'])
+        print(requestJson['name'])
         # print(request.form)
         name = requestJson["name"]
         email = requestJson["email"]

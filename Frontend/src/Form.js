@@ -32,23 +32,24 @@ function Form() {
 return (
     <div className="container">
         <div className="row">
-            <div className="col-md-12 mt-2 d-flex justify-content-center">
+        <h4 className="m-auto mt-4">Sign Up Form</h4>
+            <div className="col-md-12 mt-4 d-flex justify-content-center">
                 <form onSubmit={handleSubmit} method="post">
                     <div className="form-group">
                         <label for="firstname">First Name :</label>
-                        <input type="text" name="name" id="firstname" value={formdata.name} onChange={handleChange} />
+                        <input class="form-control" type="text" name="name" id="firstname" value={formdata.name} onChange={handleChange} />
                     </div>
                     <div className="form-group">
                         <label for="email">Email :</label>
-                        <input type="email" id="email" name="email" value={formdata.email} onChange={handleChange} />
+                        <input class="form-control" type="email" id="email" name="email" value={formdata.email} onChange={handleChange} />
                     </div>
                     <div className="form-group">
                         <label for="username">Username :</label>
-                        <input type="text" id="username" name="username" value={formdata.username} onChange={handleChange} />
+                        <input class="form-control" type="text" id="username" name="username" value={formdata.username} onChange={handleChange} />
                     </div>
                     <div className="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" value={formdata.password} onChange={handleChange} />
+                        <input class="form-control" type="password" id="password" name="password" value={formdata.password} onChange={handleChange} />
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
