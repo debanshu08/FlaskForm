@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import { login } from './utils';
 
-function Login() {
+function Login(props) {
   const [formdata, setFormData] = useState({
     username: "",
     password: "",
   });
-  const history = useHistory();
+  // const history = useHistory();
   const handleChange = (e) => {
     //Handle change for all form elements together.
     setFormData({ ...formdata, [e.target.name]: e.target.value });
   };
+  const handleSignUp = ()=>{
+    props.history.push("/")
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(
       `Username: ${formdata.username} Password: ${formdata.password}`
     );
     axios
-      .post("http://127.0.0.1:5000/login",{
+      .post("http://127.0.0.1:5000/login", {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": "true",
@@ -29,8 +33,10 @@ function Login() {
       .then((res) => {
         console.log(res);
         console.log(res.data.token);
-        window.localStorage.setItem("jwt", res.data.token);
-        history.push("/landing");
+        // window.localStorage.setItem("jwt", res.data.token);
+        // history.push("/landing");
+        login(res.data.token);
+        props.history.push("/landing");
       })
       .catch((err) => {
         const errMessage = err.response.data;
@@ -49,7 +55,7 @@ function Login() {
           });
         }
         if ("error" in errMessage) {
-          history.push("/");
+          props.history.push("/");
           alert("User Doesn't exist, signup!");
         }
       });
@@ -82,10 +88,22 @@ function Login() {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-success">
               Submit
             </button>
           </form>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12 d-flex justify-content-center">
+          <div className="d-flex mt-2">
+            <p className="mt-2">New User?</p>
+            <div>
+              <button className="btn btn-primary ml-2 mb-2" onClick={handleSignUp}>
+                Sign Up Here!
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

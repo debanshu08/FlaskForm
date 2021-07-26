@@ -51,8 +51,20 @@ return (
                         <label for="password">Password:</label>
                         <input class="form-control" type="password" id="password" name="password" value={formdata.password} onChange={handleChange} />
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-success">Submit</button>
                 </form>
+            </div>
+        </div>
+        <div className= "row">
+            <div className="col-md-12 d-flex justify-content-center">
+            <div className = "d-flex mt-2">
+                    <p className="mt-2">Already a user?</p>
+                    <div>
+                    <button className="btn btn-primary ml-2 mb-2" onClick = {
+                        ()=>history.push('/login')
+                    }>Login Here!</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
