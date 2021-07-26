@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 // import { useHistory } from "react-router-dom";
 import { login } from './utils';
+import logImage from './assests/undraw_Profile_data_re_v81r.png'
 
 function Login(props) {
   const [formdata, setFormData] = useState({
@@ -61,11 +62,16 @@ function Login(props) {
       });
   };
   return (
-    <div className="container">
+    <div className="container mt-3">
       <div className="row">
+        <div className="col-md-7 d-flex justify-content-center">
+        <div className="d-flex align-items-center">
+        <img src={logImage} alt="Form" className="img-fluid" />
+          </div>
+        </div>
+        <div className="col-md-5 mt-4">
         <h4 className="text-center m-auto mt-6">Login </h4>
-        <div className="col-md-12 mt-4 d-flex justify-content-center">
-          <form method="post" onSubmit={handleSubmit}>
+          <form method="post" onSubmit={handleSubmit} className="mt-3">
             <div className="form-group">
               <label for="username">Username: </label>
               <input
@@ -88,13 +94,13 @@ function Login(props) {
                 onChange={handleChange}
               />
             </div>
+            <div className="text-center">
             <button type="submit" className="btn btn-success">
               Submit
             </button>
+            </div>
           </form>
-        </div>
-      </div>
-      <div className="row">
+          <div className="row mt-3">
         <div className="col-md-12 d-flex justify-content-center">
           <div className="d-flex mt-2">
             <p className="mt-2">New User?</p>
@@ -104,6 +110,8 @@ function Login(props) {
               </button>
             </div>
           </div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
