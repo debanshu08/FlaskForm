@@ -30,11 +30,11 @@ function Form() {
     }
 
 return (
-    <div className="container">
+    <div className="container mt-4">
         <div className="row">
-        <h4 className="m-auto mt-4">Sign Up Form</h4>
-            <div className="col-md-12 mt-4 d-flex justify-content-center">
-                <form onSubmit={handleSubmit} method="post">
+            <div className="col-md-6 mt-4 m-auto justify-content-center">
+            <h4 className="m-auto text-center">Sign Up Form</h4>
+                <form className=" mt-4" onSubmit={handleSubmit} method="post">
                     <div className="form-group">
                         <label for="firstname">First Name :</label>
                         <input class="form-control" type="text" name="name" id="firstname" value={formdata.name} onChange={handleChange} />
