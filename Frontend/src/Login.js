@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import axios from "axios";
 // import { useHistory } from "react-router-dom";
 import { login } from './utils';
@@ -62,14 +62,16 @@ function Login(props) {
       });
   };
   return (
-    <div className="container mt-3">
+    <Fragment>
+      <div className="d-flex align-items-center justify-content-center" style={{height:"80vh"}}>
+    <div className="container mt-5 shadow-lg p-3 mb-2 bg-white rounded" style={{height:"50vh"}} >
       <div className="row">
-        <div className="col-md-7 d-flex justify-content-center">
+        <div className="col-md-6 d-flex justify-content-center">
         <div className="d-flex align-items-center">
         <img src={logImage} alt="Form" className="img-fluid" />
           </div>
         </div>
-        <div className="col-md-5 mt-4">
+        <div className="col-md-5 mt-4 mr-1">
         <h4 className="text-center m-auto mt-6">Login </h4>
           <form method="post" onSubmit={handleSubmit} className="mt-3">
             <div className="form-group">
@@ -115,6 +117,8 @@ function Login(props) {
         </div>
       </div>
     </div>
+    </div>
+    </Fragment>
   );
 }
 

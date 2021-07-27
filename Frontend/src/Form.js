@@ -37,14 +37,15 @@ function Form() {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="d-flex align-items-center justify-content-center" style={{height:"80vh"}}>
+    <div className="container mt-4 shadow-lg p-5 mb-2 bg-white rounded">
       <div className="row">
         <div className="col-md-7 d-flex justify-content-center">
             <div className="d-flex align-items-center">
           <img src={image} alt="Form" className="img-fluid" />
           </div>
         </div>
-        <div className="col-md-5 mt-4">
+        <div className=" col-md-5 mt-4">
           <h4 className="m-auto text-center">Sign Up Form</h4>
           <form className=" mt-4" onSubmit={handleSubmit} method="post">
             <div className="form-group">
@@ -114,6 +115,7 @@ function Form() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

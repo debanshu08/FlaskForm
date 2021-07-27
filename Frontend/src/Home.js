@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { logout, isLogin } from './utils';
 // import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Form from './Form';
 
 class Home extends Component {
@@ -25,7 +26,8 @@ class Home extends Component {
                 {/* <h1>Home</h1> */}
 
                 {this.state.isLogin ? 
-                    <button onClick={() => this.handleLogout()}>Click here to log out</button>
+                    // <button className="btn btn-primary" onClick={() => this.handleLogout()}>Click here to log out</button>
+                    <Redirect to="/landing" />
                     : <Form/>
                 }
             </div>
